@@ -16,14 +16,8 @@ This extension supports CKAN 2.2 and up.
   ckan.plugins =  ckanext-widgets
   ```
 
-##Screenshots
-Optional section. Add some cool screenshots of your project. Highly recommended.
-
-##Demo
-Optional section. A link to a running demo of your project.
-
 ##Questions or issues?
-We keep the project's conversation in our [issues](https://github.com/CodeandoMexico/repo-guidelines/issues) page. If you have any other question you can reach us at <equipo@codeandomexico.org>.
+We keep the project's conversation in our [issues](https://github.com/CodeandoMexico/ckanext-widgets/issues) page. If you have any other question you can reach us at <equipo@codeandomexico.org>.
 
 ##Contribute ([español](/CONTRIBUYE.md))
 We want this project to be the result of a community effort. You can collaborate with [code](https://github.com/CodeandoMexico/ckanext-widgets/pulls), [ideas](https://github.com/CodeandoMexico/ckanext-widgets/issues) and [bugs](https://github.com/CodeandoMexico/ckanext-widgets/issues). 
