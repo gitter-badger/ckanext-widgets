@@ -24,7 +24,7 @@ setup(
     ],
     entry_points='''
         [ckan.plugins]
-        # Add plugins here, e.g.
-        # myplugin=ckanext.widgets.plugin:PluginClass
+        ckanext-widgets=ckanext.plugin:WidgetsPlugin
+        widgets_controller=ckanext.widgets.controller:WidgetsController
     ''',
 )
