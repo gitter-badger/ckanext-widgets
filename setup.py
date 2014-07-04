@@ -11,8 +11,8 @@ setup(
     ''',
     classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords='',
-    author='Noe Dominguez Porras',
-    author_email='noe@codeandomexico.org',
+    author='Noe Dominguez Porras & Miguel Angel Gordian',
+    author_email='datamx@codeandomexico.org',
     url='http://codeandomexico.org',
     license='AGPL 3.0',
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
