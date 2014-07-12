@@ -7,6 +7,7 @@ NotAuthorized = logic.NotAuthorized
 get_action = p.toolkit.get_action
 
 _ = p.toolkit._
+c = p.toolkit.c
 
 class WidgetsController(p.toolkit.BaseController):
     controller = 'ckanext.widgets.controller.WidgetsController'
