@@ -1,5 +1,10 @@
 import ckan.plugins as p
 import logging
+import ckan.logic as logic
+
+NotFound = logic.NotFound
+NotAuthorized = logic.NotAuthorized
+get_action = p.toolkit.get_action
 
 _ = p.toolkit._
 
