@@ -11,53 +11,36 @@
 <body>
 <!--h1>{{ c.package }}</h1-->
 <div class="module-content">
-  <h1>{{c.package.title}}</h1>
+  {% set pkg = c.package %}
+
+  {% if pkg.private %}
+  <span class="dataset-private label label-inverse pull-right">
+    <i class="icon-lock"></i>
+    {{ _('Private') }}
+  </span>
+  {% endif %}
+  <h1>
+    {{ pkg.title or pkg.name }}
+    {% if pkg.state.startswith('draft') %}
+    [{{ _('Draft') }}]
+    {% endif %}
+  </h1>
+  {% if c.pkg_notes_formatted %}
   <div class="notes embedded-content">
-    <p>{{c.package.notes}}</p>
+    {{ c.pkg_notes_formatted }}
   </div>
-  <span class="insert-comment-thread"></span>
-  <section class="resources">
-    <h3>Datos y Recursos</h3>
-    <ul class="resource-list">
-      {% for resource in c.package.resources %}
-      <li class="resource-item" data-id="{{resource.id}}">
-      <a class="heading" href="{{resource.url}}" title="{{resource.name}}">
-        {{resource.name}}<span class="format-label" property="dc:format" data-format="{{resource.format|lower}}"> {{resource.format}}</span>
-      </a>
-      </li>
-      {%- endfor %}
-    </ul>
-  </section>
-  <section class="tags">
-    <h3>Tags</h3>
-    <ul class="tag-list well">
-      {% for tag in c.package.tags %}
-      <li>
-      <a class="tag" href="/dataset?tags={{tag.name}}">{{tag.display_name}}</a>
-      </li>
-      {%- endfor %}
-    </ul>
-  </section>
-  <section class="additional-info">
-    <h3>Información Adicional</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Campo</th>
-          <th scope="col">Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row" class="dataset-label">Estado</th>
-        <td class="dataset-details">{{c.package.state}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
+  {% endif %}
+
+  {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+
+  {% snippet "snippets/tags.html", tags=pkg.tags %}
+
+  {% snippet "snippets/additional_info.html", pkg_dict=pkg %}
+
+
 </div>
 <div class="footer">
-    <img src="/datamx.gif" class="img-footer" />
+  <img src="/datamx.gif" class="img-footer" />
 </div>
 </body>
 </html>
