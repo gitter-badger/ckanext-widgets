@@ -1,7 +1,9 @@
 Ckanext-widgets ([español](/LEEME.md))
 ============
 
-This is a CKAN extension to create embedabble responsive widgets in other sites.
+This is a CKAN extension to create embedabble responsive widgets of the dataset
+views in other sites in the route (/dataset/{id}/widget). This is WIP.
+
 This extension supports CKAN 2.2 and up.
 
 ##Installation / Setup

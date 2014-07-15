@@ -1,7 +1,11 @@
 Ckanext-widgets ([english](/README.md))
 ============
 
-Esta es una extension de CKAN para crear widgets embebibles y ajustables en otros sitios.
+Esta es una extension de CKAN para crear widgets de la vista del dataset
+(/dataset/{id}/widget) que sean embebibles y ajustables en otros sitios.
+
+Este es trabajo en desarrollo.
+
 Esta extensión soporta CKAN 2.2 y mayores.
 
 ##Instalación / Configuración
