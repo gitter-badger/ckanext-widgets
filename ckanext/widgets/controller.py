@@ -1,7 +1,13 @@
 import ckan.plugins as p
 import logging
-from ckan.plugins.toolkit import (NotAuthorized, get_action, abort, _, c,
-ObjectNotFound as NotFound)
+from ckan.plugins import toolkit
+
+NotAuthorized = toolkit.NotAuthorized 
+get_action  = toolkit.get_action
+abort  = toolkit.abort
+_  = toolkit._
+c = toolkit.c
+NotFound = toolkit.ObjectNotFound
 
 
 class WidgetsController(p.toolkit.BaseController):
