@@ -22,3 +22,6 @@ class WidgetsPlugin(p.SingletonPlugin):
 
         #This plugin public files.
         toolkit.add_public_directory(config, 'public')
+
+        #This plugin fanstatic  files.
+        toolkit.add_resource('fanstatic', 'widget')
