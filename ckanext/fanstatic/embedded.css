@@ -22,6 +22,12 @@
     border-radius: 8px;
     width: 80px;
 }
+
+#standard-preview div:hover, .standard-preview-active {
+    background-color: #25255B;
+    color: white !important;
+}
+
 .buttom:hover {
     background-color: #25255B;
     color: #FFF;
@@ -100,10 +106,6 @@ font-size: 10px;
 
 }
 
-#standard-preview div:hover {
-    background-color: #25255B;
-    color: white;
-}
 
 #standard-preview #large {
     width: 90px;
