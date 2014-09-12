@@ -224,3 +224,30 @@ h3{
 .table{
   font-size:1.2em;
 }
+.logo-organization{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
+  margin-bottom: 3em;
+  display:block;
+  max-width: 15em;
+} 
+.footer-conoce{
+  color:#929292;
+}
+
+.footer-text{
+  color:#FFF;
+  width: 14em;
+  float: left;
+  line-height: 1.2em;
+  text-align: left;
+  padding-left: 2em;
+}
+.footer-logo{
+  width:9em;
+  height:7em;
+  margin-right:7em;
+  float:right;
+}
+

@@ -19,12 +19,13 @@
     {{ _('Private') }}
   </span>
   {% endif %}
-  <h1>
-    {{ pkg.title or pkg.name }}
-    {% if pkg.state.startswith('draft') %}
-    [{{ _('Draft') }}]
-    {% endif %}
-  </h1>
+
+  {% if pkg.image_url %}
+  <img src="{{img.image_url}}" class="logo-organization" />
+  {% endif %}
+
+  <h1>{{ _('Data and Resources') }}</h1>
+
   {% if c.pkg_notes_formatted %}
   <div class="notes embedded-content">
     {{ c.pkg_notes_formatted }}
@@ -40,7 +41,21 @@
 
 </div>
 <div class="footer">
-  <img src="/datamx.gif" class="img-footer" />
+  <div class="footer-text">
+    <h3 class="footer-conoce">Conoce los datos:</h3>
+    <p>
+    {{ pkg.title or pkg.name }}
+    {% if pkg.state.startswith('draft') %}
+    [{{ _('Draft') }}]
+    {% endif %}
+    </p>
+  </div>
+
+  <div class="footer-logo">
+    <a href="http://datamx.io">
+      <img src="/datamx.gif" class="img-footer" />
+    </a>
+  </div>
 </div>
 </body>
 </html>
