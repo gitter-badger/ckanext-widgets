@@ -20,8 +20,8 @@
   </span>
   {% endif %}
 
-  {% if pkg.image_url %}
-  <img src="{{img.image_url}}" class="logo-organization" />
+  {% if pkg.organization.image_url %}
+  <img src="{{pkg.organization.image_url}}" class="logo-organization" />
   {% endif %}
 
   <h1>{{ _('Data and Resources') }}</h1>
