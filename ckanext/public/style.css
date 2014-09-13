@@ -240,15 +240,18 @@ h3{
 
 .footer-text{
   color:#FFF;
-  width: 14em;
+  width: 13em;
   float: left;
-  line-height: 1.2em;
+  line-height: 1em;
   text-align: left;
   padding-left: 2em;
+  padding-top:0.45em;
+  font-size:1.08em;
 }
 .footer-logo{
   width:9em;
   height:7em;
+  padding-top:1.03em;
   margin-right:7em;
   float:right;
 }
