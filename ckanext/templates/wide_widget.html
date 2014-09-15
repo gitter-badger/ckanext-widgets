@@ -1,3 +1,4 @@
+
 <html lang="en"><head>
 <meta content="text/html;charset=UTF-8" http-equiv="content-type">
 <meta charset="utf-8">
@@ -20,24 +21,23 @@
   </span>
   {% endif %}
 
-  {% if pkg.organization.image_url %}
-  <img src="{{pkg.organization.image_url}}" class="logo-organization" />
-  {% endif %}
 
   <h1>{{ _('Data and Resources') }}</h1>
 
- <div class="resources-wide">  
   {% if c.pkg_notes_formatted %}
   <div class="notes embedded-content">
     {{ c.pkg_notes_formatted }}
   </div>
   {% endif %}
-  {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
 
+  <div class="resources-wide" >
+    {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+    {% if pkg.organization.image_url %}
+      <img src="{{pkg.organization.image_url}}" class="logo-organization-wide" />
+    {% endif %}
   </div>
 
-  {% snippet "snippets/tags.html", tags=pkg.tags %}
-
+  {% snippet "snippets/tags.html", tags=pkg.tags %}    
 
 
 </div>
@@ -52,6 +52,32 @@
     {% endif %}
     </p>
   </div>
+
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{ _('contains').capitalize()}}:</h3>
+    <p>
+      {% if pkg.num_resources == 0 %}
+         {{_('Resource data not found')}}
+      {% elif pkg.num_resources == 1 %}
+         {{ pkg.num_resources}} {{_('Resource')}}
+      {% elif pkg.num_resources >= 1 %}
+         {{ pkg.num_resources}} {{_('Resources')}}
+      {% endif %}
+    </p>
+  </div>
+
+
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{_('Formats')}}:</h3>
+    <p>
+    {% set resources_formats = [] %}
+    {% for resource in pkg.resources %}
+      {% do resources_formats.append(resource.format) if resource.format not in resources_formats %}
+    {% endfor %}
+      {{ resources_formats|join(', ') }}
+    </p>
+  </div>
+
 
   <div class="footer-logo">
     <a href="http://datamx.io">

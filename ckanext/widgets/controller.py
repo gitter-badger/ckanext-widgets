@@ -7,6 +7,7 @@ get_action  = toolkit.get_action
 abort  = toolkit.abort
 _  = toolkit._
 c = toolkit.c
+request = toolkit.request
 NotFound = toolkit.ObjectNotFound
 
 
@@ -25,7 +26,13 @@ class WidgetsController(p.toolkit.BaseController):
         try:
             c.package = get_action('package_show')(context, {'id': id})
             data_dict = {'resource': c.resource, 'package': c.package}
-            return p.toolkit.render('widget.html', data_dict)
+            if 'widget_type' in request.params:
+              if request.params['widget_type'] == 'wide' :
+                return p.toolkit.render('wide_widget.html', data_dict)
+              else:
+                return p.toolkit.render('widget.html', data_dict)
+            else:
+              return p.toolkit.render('widget.html', data_dict)
         except NotFound:
             abort(404, _('Resource not found'))
         except NotAuthorized:
