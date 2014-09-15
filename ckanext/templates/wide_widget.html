@@ -21,9 +21,6 @@
   </span>
   {% endif %}
 
-  {% if pkg.organization.image_url %}
-  <img src="{{pkg.organization.image_url}}" class="logo-organization" />
-  {% endif %}
 
   <h1>{{ _('Data and Resources') }}</h1>
 
@@ -33,10 +30,14 @@
   </div>
   {% endif %}
 
-  {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+  <div class="resources-wide" >
+    {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+    {% if pkg.organization.image_url %}
+      <img src="{{pkg.organization.image_url}}" class="logo-organization-wide" />
+    {% endif %}
+  </div>
 
-  {% snippet "snippets/tags.html", tags=pkg.tags %}
-
+  {% snippet "snippets/tags.html", tags=pkg.tags %}    
 
 
 </div>
