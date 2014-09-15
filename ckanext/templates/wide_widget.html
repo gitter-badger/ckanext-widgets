@@ -1,0 +1,90 @@
+
+<html lang="en"><head>
+<meta content="text/html;charset=UTF-8" http-equiv="content-type">
+<meta charset="utf-8">
+<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
+<base target="_parent">
+<link href="/style.css" media="screen" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--h1>{{ c.package }}</h1-->
+<div class="module-content">
+  {% set pkg = c.package %}
+
+  {% if pkg.private %}
+  <span class="dataset-private label label-inverse pull-right">
+    <i class="icon-lock"></i>
+    {{ _('Private') }}
+  </span>
+  {% endif %}
+
+  {% if pkg.organization.image_url %}
+  <img src="{{pkg.organization.image_url}}" class="logo-organization" />
+  {% endif %}
+
+  <h1>{{ _('Data and Resources') }}</h1>
+
+  {% if c.pkg_notes_formatted %}
+  <div class="notes embedded-content">
+    {{ c.pkg_notes_formatted }}
+  </div>
+  {% endif %}
+
+  {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+
+  {% snippet "snippets/tags.html", tags=pkg.tags %}
+
+
+
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{_('Dataset')}}:</h3>
+    <p>
+    {{ pkg.title or pkg.name }}
+    {% if pkg.state.startswith('draft') %}
+    [{{ _('Draft') }}]
+    {% endif %}
+    </p>
+  </div>
+
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{ _('contains').capitalize()}}:</h3>
+    <p>
+      {% if pkg.num_resources == 0 %}
+         {{_('Resource data not found')}}
+      {% elif pkg.num_resources == 1 %}
+         {{ pkg.num_resources}} {{_('Resource')}}
+      {% elif pkg.num_resources >= 1 %}
+         {{ pkg.num_resources}} {{_('Resources')}}
+      {% endif %}
+    </p>
+  </div>
+
+
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{_('Formats')}}:</h3>
+    <p>
+    {% set resources_formats = [] %}
+    {% for resource in pkg.resources %}
+      {% do resources_formats.append(resource.format) if resource.format not in resources_formats %}
+    {% endfor %}
+      {{ resources_formats|join(', ') }}
+    </p>
+  </div>
+
+
+  <div class="footer-logo">
+    <a href="http://datamx.io">
+      <img src="/datamx.gif" class="img-footer" />
+    </a>
+  </div>
+</div>
+
+
+</body>
+</html>
