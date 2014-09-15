@@ -39,9 +39,10 @@
 
 
 </div>
+
 <div class="footer">
   <div class="footer-text">
-    <h3 class="footer-conoce">Conoce los datos:</h3>
+    <h3 class="footer-conoce">{{_('Dataset')}}:</h3>
     <p>
     {{ pkg.title or pkg.name }}
     {% if pkg.state.startswith('draft') %}
@@ -56,5 +57,7 @@
     </a>
   </div>
 </div>
+
+
 </body>
 </html>
