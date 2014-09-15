@@ -26,13 +26,15 @@
 
   <h1>{{ _('Data and Resources') }}</h1>
 
+ <div class="resources-wide">  
   {% if c.pkg_notes_formatted %}
   <div class="notes embedded-content">
     {{ c.pkg_notes_formatted }}
   </div>
   {% endif %}
-
   {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+
+  </div>
 
   {% snippet "snippets/tags.html", tags=pkg.tags %}
 

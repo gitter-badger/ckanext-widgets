@@ -240,7 +240,7 @@ h3{
 
 .footer-text{
   color:#FFF;
-  width: 13em;
+  width: 12em;
   float: left;
   line-height: 1em;
   text-align: left;
@@ -265,7 +265,7 @@ h3{
   display:block;
 }
 #dataset-resources{
-  width:35em;
+  width:25em;
   float:left;
   text-align:left;
 }
