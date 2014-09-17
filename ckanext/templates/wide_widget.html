@@ -33,7 +33,7 @@
   <div class="resources-wide" >
     {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
     {% if pkg.organization.image_url %}
-      <img src="{{pkg.organization.image_url}}" class="logo-organization-wide" />
+      <img src="{{pkg.organization.image_url or h.url_for_static('/base/images/placeholder-organization.png')}}" class="logo-organization-wide" />
     {% endif %}
   </div>
 
