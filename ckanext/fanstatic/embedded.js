@@ -28,8 +28,16 @@ Bind = function (valueA, valueB) {
   valueB(valueA);
 }
 
-function fromJSONtoQuery () {
-    return "";
+function fromJSONtoQuery (object) {
+    var base = "?"
+    var val = true;
+    for (var key in object) {
+       if (!val) base += "&";
+       val = false;
+       base += key + "=" + object[key];
+    }
+    console.log(base);
+    return base;
 }
 
 
@@ -42,10 +50,11 @@ function BuildURL(schema) {
       attr: {
         width: schema["attr"]["width"],
         height: schema["attr"]["height"],
+        frameborder: 0,
+        scrolling: "no"
       }
     };  
 
-  
     this.constructor = BuildURL;
 
     this.width = function (newWidth) {
@@ -65,17 +74,22 @@ function BuildURL(schema) {
     // TODO: Add support for build query with non specific arguments
     this.query = function (query){
 	if (query != undefined && query != null) {
-          inner.attr.query = setQuery(schema.query, query);
+          inner.query = query; //setQuery(schema.query, query);
 	}
-        return inner.attr.query;
+        console.log(inner.query);
+        return inner.query;
     }
 
     //TODO - Verificar el schema coincida con el schema de codeandomexico
     this.url = function () {
-       return inner.protocol + inner.host + inner.path; //+ fromJSONtoQuery(inner.query);
+       return inner.protocol + inner.host + inner.path + fromJSONtoQuery(inner.query);
     }
     this.code = function () {
-          return "<iframe src='" + this.url() + "' width='" + this.width() + "' height='" + this.height() + "'></iframe>";
+          return "<iframe src='" + this.url() + 
+	"' width='" + this.width() + 
+	"' height='" + this.height() + 
+	"' frameborder='" + inner.attr.frameborder +
+	"' scrolling='" + inner.attr.scrolling + "'></iframe>";
     }
 }
 
@@ -91,16 +105,27 @@ function validateNumeric(n){
   return 0;
 }
 
+
+var active = function (element, str) {
+   var _class = $(element).attr("class").split(/\s+/);
+   for (var elem in _class) {
+      console.log(_class[elem]);
+      if (_class[elem] === str) return true;
+   }
+   return false;
+}
 $(document).ready(function () {
 
   var widget = new BuildURL({
     protocol: window.location.protocol,
     host: window.location.host,
     path: window.location.pathname + '/widget',
-    query: {},
+    query: {
+      widget_type: "widen"
+    },
     attr: {
-      width: 300,
-      height: 423
+      width: 600,
+      height: 420
     }
   });
 
@@ -148,7 +173,7 @@ $(document).ready(function () {
 	$("#large").removeClass("standard-preview-active");
 	$("#mini").addClass("standard-preview-active");
 	controller.width(300);
-	controller.height(423);
+	controller.height(500);
 
         $(".code-embedded").text(controller.code());
 	});
@@ -161,7 +186,54 @@ $(document).ready(function () {
 
         $(".code-embedded").text(controller.code());
 	});
-  
+ 
+ 
+   $("#widen").click(function () {
+       if (active("#widen", "selected")) {
+          if (active("#narrow", "active")) {
+	     $("#narrow").addClass("shidden");
+             $("#narrow").removeClass("active");
+	   } else {
+             $("#narrow").addClass("active"); 
+             $("#narrow").removeClass("shidden");
+	   }
+	} else {
+          $("#widen").addClass("selected");
+          $("#widen").removeClass("active");
+	  $("#narrow").addClass("shidden");
+          $("#narrow").removeClass("selected");
+          controller.query({"widget_type": "widen"});
+          $(".code-embedded").text(controller.code());
+	}
+	});
+   
+   $("#narrow").click(function () {
+       if (active("#narrow", "selected")) {
+          if (active("#widen", "active")) {
+	    $("#widen").addClass("shidden");
+            $("#widen").removeClass("active");
+          } else {
+ /*           $("#narrow").removeClass("shidden");*/
+            $("#widen").addClass("active"); 
+            $("#widen").removeClass("shidden");
+          }
+	} else {
+          $("#narrow").addClass("selected");
+          $("#narrow").removeClass("active");
+	  $("#widen").addClass("shidden");
+          $("#widen").removeClass("selected");
+          controller.query({"widget_type": "narrow"});
+          $(".code-embedded").text(controller.code());
+	}
+	});
+
+      $("#visual").click(function(){
+          window.open(
+	window.location.pathname + 
+	"/test_widget?width=" + controller.width() +
+    	"&height=" + controller.height() +
+    	"&widget_type=" + controller.query()["widget_type"] )
+	});
  /*   $("#small").onClick(
 	function () {
            ModifyText

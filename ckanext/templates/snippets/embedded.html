@@ -9,8 +9,8 @@
     <h3>Inserta este conjunto de datos</h3>
     <div class="separation">
       <ul class="style-widget">
-        <li class="style-widget ">Minimalista</li>
-        <li class="style-widget">Banner</li>
+        <li id="widen" class="style-widget shidden">Minimalista</li>
+        <li id="narrow" class="style-widget selected">Banner</li>
       </ul>
 
       <textarea class="code-embedded border" rows="4" >
@@ -20,10 +20,10 @@
 
     <h3>Tamaño</h3>
     <div id="standard-preview" class="separation border">
-      <div id="mini" class="standard-preview-active">
-        <p >300x423</p>
+      <div id="mini" 
+        <p >300x500</p>
       </div>
-      <div id="large">
+      <div id="large" class="standard-preview-active">
           <p >900x400</p>
       </div>
     </div>
@@ -35,7 +35,7 @@
       </form>
     </div>
     <div class="buttons">
-      <a class="buttom ">Visualizar</a>
+      <a id="visual" class="buttom ">Visualizar</a>
       <a class="buttom toggle-widget" >Hecho</a>
     </div>
   </div>
