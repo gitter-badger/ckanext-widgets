@@ -10,6 +10,10 @@ c = toolkit.c
 request = toolkit.request
 NotFound = toolkit.ObjectNotFound
 
+log =logging.getLogger(__name__)
+
+
+
 
 class WidgetsController(p.toolkit.BaseController):
     controller = 'ckanext.widgets.controller.WidgetsController'
@@ -26,6 +30,7 @@ class WidgetsController(p.toolkit.BaseController):
         try:
             c.package = get_action('package_show')(context, {'id': id})
             data_dict = {'resource': c.resource, 'package': c.package}
+
             if 'widget_type' in request.params:
               if request.params['widget_type'] == 'wide' :
                 return p.toolkit.render('wide_widget.html', data_dict)
