@@ -21,7 +21,7 @@
   {% endif %}
 
   {% if pkg.organization.image_url %}
-  <img src="{{pkg.organization.image_url}}" class="logo-organization" />
+  <img src="{{pkg.organization.image_url or h.url_for_static('/base/images/placeholder-organization.png')}}" class="logo-organization" />
   {% endif %}
 
   <h1>{{ _('Data and Resources') }}</h1>

@@ -10,6 +10,15 @@ c = toolkit.c
 request = toolkit.request
 NotFound = toolkit.ObjectNotFound
 
+log =logging.getLogger(__name__)
+
+## Fix for unformatted images in organization dictionary CKAN
+## https://github.com/ckan/ckan/issues/1934
+import ckan.lib.munge as munge
+import ckan.lib.helpers as h
+##END Fix for unformatted images in organization dictionary CKAN
+
+
 
 class WidgetsController(p.toolkit.BaseController):
     controller = 'ckanext.widgets.controller.WidgetsController'
@@ -26,6 +35,18 @@ class WidgetsController(p.toolkit.BaseController):
         try:
             c.package = get_action('package_show')(context, {'id': id})
             data_dict = {'resource': c.resource, 'package': c.package}
+
+            log.warning(str(c.package['organization']['image_url']))
+            ## Fix for unformatted images in organization dictionary CKAN
+            ## https://github.com/ckan/ckan/issues/1934
+            if c.package['organization']['image_url'] and not c.package['organization']['image_url'].startswith('http'):
+               image_url = c.package['organization']['image_url']
+               c.package['organization']['image_url'] = h.url_for_static(
+                   'uploads/group/%s' % image_url,
+                   qualified = True
+               )
+            ##END Fix for unformatted images in organization dictionary CKAN
+
             if 'widget_type' in request.params:
               if request.params['widget_type'] == 'wide' :
                 return p.toolkit.render('wide_widget.html', data_dict)
