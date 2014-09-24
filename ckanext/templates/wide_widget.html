@@ -1,5 +1,5 @@
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta content="text/html;charset=UTF-8" http-equiv="content-type">
 <meta charset="utf-8">
 <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -11,35 +11,48 @@
 </head>
 <body>
 <!--h1>{{ c.package }}</h1-->
-<div class="module-content">
   {% set pkg = c.package %}
 
-  {% if pkg.private %}
-  <span class="dataset-private label label-inverse pull-right">
-    <i class="icon-lock"></i>
-    {{ _('Private') }}
-  </span>
-  {% endif %}
+  {% if "banner" in parameters and pkg.extras and parameters['banner'] == "true"  %}
+    {% for extra in pkg.extras %} 
+      {% if extra['key'] == "dataset_image" and parameters['banner'] == "true" %}
+        <div class="page-wrap">
+          <img src="{{ extra['value'] }}" class="dataset-image" />
+        </div>
+      {% endif %}
+    {% endfor %}
 
-
-  <h1>{{ _('Data and Resources') }}</h1>
-
-  {% if c.pkg_notes_formatted %}
-  <div class="notes embedded-content">
-    {{ c.pkg_notes_formatted }}
-  </div>
-  {% endif %}
-
-  <div class="resources-wide" >
-    {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
-    {% if pkg.organization.image_url %}
-      <img src="{{pkg.organization.image_url or h.url_for_static('/base/images/placeholder-organization.png')}}" class="logo-organization-wide" />
+  {% else %}
+  
+<div class="page-wrap">
+  <div class="module-content">
+      {% if pkg.private %}
+      <span class="dataset-private label label-inverse pull-right">
+        <i class="icon-lock"></i>
+        {{ _('Private') }}
+      </span>
+      {% endif %}
+    
+    
+      <h1>{{ _('Data and Resources') }}</h1>
+    
+      {% if c.pkg_notes_formatted %}
+      <div class="notes embedded-content">
+        {{ c.pkg_notes_formatted }}
+      </div>
+      {% endif %}
+    
+      <div class="resources-wide" >
+        {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+        {% if pkg.organization.image_url %}
+          <img src="{{pkg.organization.image_url}}" class="logo-organization-wide" />
+        {% endif %}
+      </div>
+    
+      {% snippet "snippets/tags.html", tags=pkg.tags %}    
     {% endif %}
+  
   </div>
-
-  {% snippet "snippets/tags.html", tags=pkg.tags %}    
-
-
 </div>
 
 <div class="footer">
