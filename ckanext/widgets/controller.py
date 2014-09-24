@@ -34,7 +34,7 @@ class WidgetsController(p.toolkit.BaseController):
         }
         try:
             c.package = get_action('package_show')(context, {'id': id})
-            data_dict = {'resource': c.resource, 'package': c.package}
+            data_dict = {'resource': c.resource, 'package': c.package, 'parameters': request.params }
 
             log.warning(str(c.package['organization']['image_url']))
             ## Fix for unformatted images in organization dictionary CKAN
