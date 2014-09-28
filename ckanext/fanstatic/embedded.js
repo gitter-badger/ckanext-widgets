@@ -174,8 +174,10 @@ $(document).ready(function () {
 	$("#mini").addClass("standard-preview-active");
 	controller.width(300);
 	controller.height(500);
-
+        
         $(".code-embedded").text(controller.code());
+        $("#height-widget").val(500);
+	$("#width-widget").val(300);
 	});
 
     $("#large").click( function () {
@@ -185,6 +187,8 @@ $(document).ready(function () {
 	controller.height(400);
 
         $(".code-embedded").text(controller.code());
+        $("#height-widget").val(400);
+	$("#width-widget").val(900);
 	});
  
       $("#visual").click(function(){
@@ -204,4 +208,7 @@ $(document).ready(function () {
 /*  $(".style-widget").click(function(){
     $(".style-widget").toggleClass("active");
   })*/
+
+    $("#height-widget").val(400);
+    $("#width-widget").val(900);
 });
