@@ -1,0 +1,17 @@
+{% ckan_extends %}
+
+{% block maintag %}
+  {{ super() }}
+{% endblock %}
+
+{% block package_notes %}
+
+<div class="btn-group embedded">
+    <a id="embedded-btn" class="btn btn-warning toggle-widget" href="#">Embeber</a>
+</div>
+
+  {% snippet 'snippets/embedded.html' %}
+  {% resource 'widget/embedded.css' %}
+  {% resource 'widget/embedded.js' %}
+{{super()}}
+{% endblock %}

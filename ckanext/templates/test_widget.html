@@ -1,0 +1,94 @@
+<html lang="es">
+<head>
+  <title>Test del widget {{ Organization }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="">
+  <style type="text/css">
+    * {
+    margin: 0px;
+    padding: 0px;
+    }
+
+    #widget {
+    border: 1px grey solid; 
+    }
+
+    body {
+    background-color: #DBDBDB;
+    }
+
+    #header {
+    background-color: #283858;
+    height: 60px;
+    letter-spacing: 1px;
+    overflow: auto;
+    }
+
+    #logo {
+    width: 299px;
+    height: 100%;
+    background-color: #151F31;
+    text-align: center;
+    display: inline-block;
+    }
+
+    #logo-image {
+    padding-top: 12px;
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 160px;
+    height: 37px;
+    }
+
+    img {
+    vertical-align: middle;
+    }
+
+    .container{
+     text-align: center;
+    }
+
+    iframe {
+    margin: 20px;
+    }
+
+    a{
+    color: white;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 1.42857;
+    text-decoration: none;
+
+    }
+
+    @media all and (max-width: 600px) {
+    #logo {
+    width: 100%;
+    }
+    }
+  </style>
+
+</head>
+<body>
+<nav id="header">
+  <a id="logo" href="http://datamx.io">
+    <img id="logo-image" alt="datamx.io" src="http://apertura.datamx.io/images/datamx_dark.png"/>
+  </a>
+</nav>
+
+{% set query = '' %}
+{% set host = c.environ.HTTP_HOST %}
+{% set package = c.package.name %}
+
+
+{% if widget_type == 'wide' %}
+{% set query = '?widget_type=' ~ widget_type %}
+{% endif %}
+
+<div class="container">
+  <iframe id="widget" src="http://{{host}}/dataset/{{package}}/widget{{query}}" width="{{width}}" height="{{height}}" frameborder="0" scrolling="no"></iframe>
+</div>
+<script src="/parameters.js"></script>
+</div></body>
+</html>
