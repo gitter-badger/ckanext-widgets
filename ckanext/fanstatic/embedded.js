@@ -1,5 +1,5 @@
 /*
-  The Code element declare the following components:
+  The Code element declares the following components:
     - Width
     - Height
     - Url
@@ -36,7 +36,7 @@ function fromJSONtoQuery (object) {
        val = false;
        base += key + "=" + object[key];
     }
-    console.log(base);
+    //console.log(base);
     return base;
 }
 
@@ -76,7 +76,7 @@ function BuildURL(schema) {
 	if (query != undefined && query != null) {
           inner.query = query; //setQuery(schema.query, query);
 	}
-        console.log(inner.query);
+        //console.log(inner.query);
         return inner.query;
     }
 
@@ -109,7 +109,7 @@ function validateNumeric(n){
 var active = function (element, str) {
    var _class = $(element).attr("class").split(/\s+/);
    for (var elem in _class) {
-      console.log(_class[elem]);
+      //console.log(_class[elem]);
       if (_class[elem] === str) return true;
    }
    return false;
@@ -121,7 +121,7 @@ $(document).ready(function () {
     host: window.location.host,
     path: window.location.pathname + '/widget',
     query: {
-      widget_type: "widen"
+      widget_type: "wide"
     },
     attr: {
       width: 600,
@@ -130,7 +130,7 @@ $(document).ready(function () {
   });
 
   var controller = widget;
-  console.log("Inicio de interaccion para embebe el widget");
+  //console.log("Inicio de interaccion para embebe el widget");
 
 /*
  * Close del embedded widget
@@ -140,7 +140,7 @@ $(document).ready(function () {
 */
     $(".toggle-widget").click(function () {
         $(".main-widget").toggleClass("active-widget");
-        console.log("Muestra/Oculta");
+        //console.log("Muestra/Oculta");
     });
 
     // Limpieza de inputs
@@ -152,7 +152,7 @@ $(document).ready(function () {
     // Monitorea tecleo en la casilla de Alto
     $("#height-widget").keyup(function() {
 
-	console.log("height modificado: " +  $("#height-widget").val());
+	//console.log("height modificado: " +  $("#height-widget").val());
 	controller.height(parseInt($("#height-widget").val()));
         $(".code-embedded").text(controller.code());
 	$("#large").removeClass("standard-preview-active");
@@ -161,7 +161,7 @@ $(document).ready(function () {
 
     // Monitorea tecleo en la casilla de Ancho
     $("#width-widget").keyup(function() {
-	console.log("Width modificado: " + $("#width-widget").val());
+	//console.log("Width modificado: " + $("#width-widget").val());
 	controller.width(parseInt($("#width-widget").val()));
 	$(".code-embedded").text(controller.code());
 	$("#large").removeClass("standard-preview-active");
