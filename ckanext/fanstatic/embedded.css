@@ -2,7 +2,7 @@
  float: right;
 }
 
-.buttom {
+.button-widget-preview {
     display: inline-block;
     margin: 10px;
     text-align: center;
@@ -28,7 +28,7 @@
     color: white !important;
 }
 
-.buttom:hover {
+.button-widget-preview:hover {
     background-color: #25255B;
     color: #FFF;
 
