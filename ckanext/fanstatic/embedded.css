@@ -218,3 +218,23 @@ font-size: 10px;
 #banner {
   margin: 20px 0px 0px;
 }
+
+
+@media  all and (max-width: 520px) {
+.main-widget {
+    height: 100%;
+    background-color: #EAEAEA;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: .6em;
+    line-height: 20px;
+    margin-top: 0px;
+    color: #444;
+    position: relative;
+    width: 100%;
+}
+
+.main-widget .embedded  {
+  float: unset;
+}
+
+}
