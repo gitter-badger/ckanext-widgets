@@ -32,12 +32,10 @@ function fromJSONtoQuery (object) {
     var base = "?"
     var val = true;
     for (var key in object) {
-       if (object[key] != "") {
-         if (!val) base += "&";
-         val = false;
-         base += key + "=" + object[key];
-       }
-    }
+        if (object[key] != "" && object[key] != null) {
+	  if (!val) base += "&";
+          val = false;
+          base += key + "=" + object[key]; }}
     console.log(base);
     return base;
 }
@@ -75,10 +73,9 @@ function BuildURL(schema) {
 
     // TODO: Add support for build query with non specific arguments
     this.query = function (query){
-        if (query != undefined && query != null) {
+	if (query != undefined && query != null) {
           for (key in query) {
             inner.query[key] = query[key]; //setQuery(schema.query, query);
-	    console.log(key + " " + query[key]);
           }
 	}
         console.log(inner.query);
@@ -127,6 +124,33 @@ var active = function (element, str) {
    }
    return false;
 }
+
+var activeMini = function () {
+	$("#large").removeClass("standard-preview-active");
+	$("#mini").addClass("standard-preview-active");
+	controller.width(300);
+	controller.height(500);
+        controller.query({"widget_type": "narrow"});
+        checkBanner();
+        
+        $(".code-embedded").text(controller.code());
+        $("#height-widget").val(500);
+	$("#width-widget").val(300);
+}
+
+var activeLarge = function () {
+	$("#large").addClass("standard-preview-active");
+	$("#mini").removeClass("standard-preview-active");
+	controller.width(900);
+	controller.height(400);
+        controller.query({"widget_type": "wide"});
+        checkBanner();
+
+        $(".code-embedded").text(controller.code());
+        $("#height-widget").val(400);
+	$("#width-widget").val(900);
+}
+
 $(document).ready(function () {
 
   var widget = new BuildURL({
@@ -153,8 +177,18 @@ $(document).ready(function () {
  * - Modificar para permitir ligar acciones con Monads 
 */
     $(".toggle-widget").click(function () {
-        $(".main-widget").toggleClass("active-widget");
+        if ($(".main-widget").hasClass("active-widget")) {
+          $(".main-widget").show(200, easing="linear");
+          console.log("show");
+	} else {
+          $(".main-widget").hide(200, easing="linear");
+          console.log("hide");
+        }
+
         console.log("Muestra/Oculta");
+	$(".main-widget").toggleClass("active-widget");
+
+        
     });
 
     // Limpieza de inputs
@@ -183,68 +217,12 @@ $(document).ready(function () {
 	});
     
     // Selecciona la opcion mini de la muestras por defecto
-    $("#mini").click( function () {
-	$("#large").removeClass("standard-preview-active");
-	$("#mini").addClass("standard-preview-active");
-	controller.width(300);
-	controller.height(500);
-        checkBanner();
-        $(".code-embedded").text(controller.code());
-	});
+    $("#mini").click(activeMini);
 
-    $("#large").click( function () {
-	$("#large").addClass("standard-preview-active");
-	$("#mini").removeClass("standard-preview-active");
-	controller.width(900);
-	controller.height(400);
-        checkBanner();
-        $(".code-embedded").text(controller.code());
-	});
- 
+    $("#large").click(activeLarge);
 
- 
     $("#banner-value").click(checkBanner);
-    checkBanner();
-
-   $("#widen").click(function () {
-       if (active("#widen", "selected")) {
-          if (active("#narrow", "active")) {
-	     $("#narrow").addClass("shidden");
-             $("#narrow").removeClass("active");
-	   } else {
-             $("#narrow").addClass("active"); 
-             $("#narrow").removeClass("shidden");
-	   }
-	} else {
-          $("#widen").addClass("selected");
-          $("#widen").removeClass("active");
-	  $("#narrow").addClass("shidden");
-          $("#narrow").removeClass("selected");
-          controller.query({"widget_type": "widen"});
-          $(".code-embedded").text(controller.code());
-	}
-	});
-   
-   $("#narrow").click(function () {
-       if (active("#narrow", "selected")) {
-          if (active("#widen", "active")) {
-	    $("#widen").addClass("shidden");
-            $("#widen").removeClass("active");
-          } else {
- /*           $("#narrow").removeClass("shidden");*/
-            $("#widen").addClass("active"); 
-            $("#widen").removeClass("shidden");
-          }
-	} else {
-          $("#narrow").addClass("selected");
-          $("#narrow").removeClass("active");
-	  $("#widen").addClass("shidden");
-          $("#widen").removeClass("selected");
-          controller.query({"widget_type": "narrow"});
-          $(".code-embedded").text(controller.code());
-	}
-	});
-
+ 
       $("#visual").click(function(){
         banner = controller.query()["banner"] != "" ? "&banner=true" : "";
           window.open(
@@ -265,4 +243,9 @@ $(document).ready(function () {
 /*  $(".style-widget").click(function(){
     $(".style-widget").toggleClass("active");
   })*/
+    
+    $("#height-widget").val(400);
+    $("#width-widget").val(900);
+    activeMini();
+    checkBanner();
 });
