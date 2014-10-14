@@ -1,5 +1,5 @@
 /*
-  The Code element declare the following components:
+  The Code element declares the following components:
     - Width
     - Height
     - Url
@@ -18,20 +18,20 @@
 
 
 Id = function (element) {
-  return element;
+return element;
 }
 
 Bind = function (valueA, valueB) {
-  if (valueA == null) {
-    return null;
-  }
-  valueB(valueA);
+if (valueA == null) {
+return null;
+}
+valueB(valueA);
 }
 
 function fromJSONtoQuery (object) {
-    var base = "?"
-    var val = true;
-    for (var key in object) {
+var base = "?"
+var val = true;
+for (var key in object) {
         if (object[key] != "" && object[key] != null) {
 	  if (!val) base += "&";
           val = false;
@@ -78,7 +78,7 @@ function BuildURL(schema) {
             inner.query[key] = query[key]; //setQuery(schema.query, query);
           }
 	}
-        console.log(inner.query);
+        //console.log(inner.query);
         return inner.query;
     }
 
@@ -119,7 +119,7 @@ var checkBanner =  function () {
 var active = function (element, str) {
    var _class = $(element).attr("class").split(/\s+/);
    for (var elem in _class) {
-      console.log(_class[elem]);
+      //console.log(_class[elem]);
       if (_class[elem] === str) return true;
    }
    return false;
@@ -200,7 +200,7 @@ $(document).ready(function () {
     // Monitorea tecleo en la casilla de Alto
     $("#height-widget").keyup(function() {
 
-	console.log("height modificado: " +  $("#height-widget").val());
+	//console.log("height modificado: " +  $("#height-widget").val());
 	controller.height(parseInt($("#height-widget").val()));
         $(".code-embedded").text(controller.code());
 	$("#large").removeClass("standard-preview-active");
@@ -209,7 +209,7 @@ $(document).ready(function () {
 
     // Monitorea tecleo en la casilla de Ancho
     $("#width-widget").keyup(function() {
-	console.log("Width modificado: " + $("#width-widget").val());
+	//console.log("Width modificado: " + $("#width-widget").val());
 	controller.width(parseInt($("#width-widget").val()));
 	$(".code-embedded").text(controller.code());
 	$("#large").removeClass("standard-preview-active");

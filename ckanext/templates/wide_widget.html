@@ -11,11 +11,6 @@
 </head>
 <body>
 <!--h1>{{ c.package }}</h1-->
-{% if parameters  and false%}
-  <h1>{{ parameters }}</h1>
-  <h1>{{ parameters['banner'] }}</h1>
-{% endif %}
-
   {% set pkg = c.package %}
 
   {% if "banner" in parameters and pkg.extras and parameters['banner'] == "true"  %}
@@ -28,37 +23,38 @@
     {% endfor %}
 
   {% else %}
-
+  
 <div class="page-wrap">
-<div class="module-content">
+  <div class="module-content">
       {% if pkg.private %}
       <span class="dataset-private label label-inverse pull-right">
         <i class="icon-lock"></i>
         {{ _('Private') }}
       </span>
       {% endif %}
-  
-      {% if pkg.organization.image_url %}
-      <img src="{{pkg.organization.image_url}}" class="logo-organization" />
-      {% endif %}
-  
+    
+    
       <h1>{{ _('Data and Resources') }}</h1>
-  
-      <div class="resources-wide">  
+    
       {% if c.pkg_notes_formatted %}
       <div class="notes embedded-content">
         {{ c.pkg_notes_formatted }}
       </div>
       {% endif %}
-      {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
-  
+    
+      <div class="resources-wide" >
+        {% snippet "snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+        {% if pkg.organization.image_url %}
+          <img src="{{pkg.organization.image_url}}" class="logo-organization-wide" />
+        {% endif %}
       </div>
-  
-      {% snippet "snippets/tags.html", tags=pkg.tags %}
+    
+      {% snippet "snippets/tags.html", tags=pkg.tags %}    
     {% endif %}
-</div>
-</div>
   
+  </div>
+</div>
+
 <div class="footer">
   <div class="footer-text">
     <h3 class="footer-conoce">{{_('Dataset')}}:</h3>
@@ -70,12 +66,39 @@
     </p>
   </div>
 
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{ _('contains').capitalize()}}:</h3>
+    <p>
+      {% if pkg.num_resources == 0 %}
+         {{_('Resource data not found')}}
+      {% elif pkg.num_resources == 1 %}
+         {{ pkg.num_resources}} {{_('Resource')}}
+      {% elif pkg.num_resources >= 1 %}
+         {{ pkg.num_resources}} {{_('Resources')}}
+      {% endif %}
+    </p>
+  </div>
+
+
+  <div class="footer-text">
+    <h3 class="footer-conoce">{{_('Formats')}}:</h3>
+    <p>
+    {% set resources_formats = [] %}
+    {% for resource in pkg.resources %}
+      {% do resources_formats.append(resource.format) if resource.format not in resources_formats %}
+    {% endfor %}
+      {{ resources_formats|join(', ') }}
+    </p>
+  </div>
+
+
   <div class="footer-logo">
     <a href="http://datamx.io">
       <img src="/datamx.gif" class="img-footer" />
     </a>
   </div>
 </div>
+
 
 </body>
 </html>
