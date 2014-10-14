@@ -66,12 +66,20 @@ class WidgetsController(p.toolkit.BaseController):
             widget_type = DEFAULT["widget_type"]
 
         try:
+            banner = query["banner"][0]
+            if banner != "true":
+               raise "Invalid value for banner"
+        except:
+            banner = ""
+
+        try:
             c.package = get_action('package_show')(context, {'id': id})
             data_dict = {'resource': c.resource, 
                          'package': c.package,
                          'width': width,
                          'height': height,
-                         'widget_type': widget_type 
+                         'widget_type': widget_type,
+                         'banner': banner
             }
             return p.toolkit.render('test_widget.html', data_dict)
         except NotFound:

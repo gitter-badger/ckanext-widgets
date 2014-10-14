@@ -32,9 +32,11 @@ function fromJSONtoQuery (object) {
     var base = "?"
     var val = true;
     for (var key in object) {
-       if (!val) base += "&";
-       val = false;
-       base += key + "=" + object[key];
+       if (object[key] != "") {
+         if (!val) base += "&";
+         val = false;
+         base += key + "=" + object[key];
+       }
     }
     console.log(base);
     return base;
@@ -73,8 +75,11 @@ function BuildURL(schema) {
 
     // TODO: Add support for build query with non specific arguments
     this.query = function (query){
-	if (query != undefined && query != null) {
-          inner.query = query; //setQuery(schema.query, query);
+        if (query != undefined && query != null) {
+          for (key in query) {
+            inner.query[key] = query[key]; //setQuery(schema.query, query);
+	    console.log(key + " " + query[key]);
+          }
 	}
         console.log(inner.query);
         return inner.query;
@@ -105,6 +110,14 @@ function validateNumeric(n){
   return 0;
 }
 
+var checkBanner =  function () {
+        if (active("#large", "standard-preview-active") && $("#banner-value").is(':checked') )  {
+	  controller.query({'banner': true});
+        } else {
+	  controller.query({'banner': ''});
+        }
+        $(".code-embedded").text(controller.code());
+	}
 
 var active = function (element, str) {
    var _class = $(element).attr("class").split(/\s+/);
@@ -130,7 +143,7 @@ $(document).ready(function () {
     }
   });
 
-  var controller = widget;
+  controller = widget;
   console.log("Inicio de interaccion para embebe el widget");
 
 /*
@@ -175,7 +188,7 @@ $(document).ready(function () {
 	$("#mini").addClass("standard-preview-active");
 	controller.width(300);
 	controller.height(500);
-
+        checkBanner();
         $(".code-embedded").text(controller.code());
 	});
 
@@ -184,11 +197,15 @@ $(document).ready(function () {
 	$("#mini").removeClass("standard-preview-active");
 	controller.width(900);
 	controller.height(400);
-
+        checkBanner();
         $(".code-embedded").text(controller.code());
 	});
  
+
  
+    $("#banner-value").click(checkBanner);
+    checkBanner();
+
    $("#widen").click(function () {
        if (active("#widen", "selected")) {
           if (active("#narrow", "active")) {
@@ -229,11 +246,14 @@ $(document).ready(function () {
 	});
 
       $("#visual").click(function(){
+        banner = controller.query()["banner"] != "" ? "&banner=true" : "";
           window.open(
 	window.location.pathname + 
 	"/test_widget?width=" + controller.width() +
     	"&height=" + controller.height() +
-    	"&widget_type=" + controller.query()["widget_type"] )
+    	"&widget_type=" + controller.query()["widget_type"] +
+        banner
+        )
 	});
  /*   $("#small").onClick(
 	function () {

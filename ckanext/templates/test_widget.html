@@ -86,9 +86,12 @@
 {% set query = '?widget_type=' ~ widget_type %}
 {% endif %}
 
+{% if banner != "" %}
+{% set query = query ~ '&banner=true' %}
+{% endif %}
+
 <div class="container">
   <iframe id="widget" src="http://{{host}}/dataset/{{package}}/widget{{query}}" width="{{width}}" height="{{height}}" frameborder="0" scrolling="no"></iframe>
 </div>
-<script src="/parameters.js"></script>
 </div></body>
 </html>
