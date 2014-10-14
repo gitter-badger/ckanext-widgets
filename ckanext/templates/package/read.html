@@ -1,6 +1,7 @@
 {% ckan_extends %}
 
 {% block maintag %}
+  {% snippet 'snippets/embedded.html' %}
   {{ super() }}
 {% endblock %}
 
@@ -10,7 +11,6 @@
     <a id="embedded-btn" class="btn btn-warning toggle-widget" href="#">Embeber</a>
 </div>
 
-  {% snippet 'snippets/embedded.html' %}
   {% resource 'widget/embedded.css' %}
   {% resource 'widget/embedded.js' %}
 {{super()}}
