@@ -121,7 +121,8 @@ $(document).ready(function () {
     host: window.location.host,
     path: window.location.pathname + '/widget',
     query: {
-      widget_type: "widen"
+      widget_type: "narrow",
+      banner: ""
     },
     attr: {
       width: 600,
