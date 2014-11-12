@@ -1,5 +1,6 @@
 Ckanext-widgets ([español](/LEEME.md))
 ============
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/zoek1/ckanext-widgets?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is a CKAN extension to create embedabble responsive widgets of the dataset
 views in other sites in the route (/dataset/{id}/widget). This is WIP.
